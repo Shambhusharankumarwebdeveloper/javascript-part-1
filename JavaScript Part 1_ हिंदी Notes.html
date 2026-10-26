@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>JavaScript Part 1: हिंदी Notes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Hind:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EAF0F7;--grid:#d3deec;--card:#fff;--ink:#14213D;--mute:#4d5b75;--line:#c3cfe0;--hl:#FFC93C;--pen:#C8343A;--code:#0f1b33;--codeink:#e6edf9;--ok:#1f8a5b;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1626;--grid:#182740;--card:#16223a;--ink:#E8EEF9;--mute:#9db0cc;--line:#2b3c5c;--code:#0a1120;--ok:#4cc790;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0E1626;--grid:#182740;--card:#16223a;--ink:#E8EEF9;--mute:#9db0cc;--line:#2b3c5c;--code:#0a1120;--ok:#4cc790;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px);height:100%}
+body{margin:0;min-height:100%;background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font:400 17px/1.7 Hind,"Noto Sans Devanagari",system-ui,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:20}
+.wrap{max-width:880px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:"Baloo 2","Noto Sans Devanagari",system-ui,sans-serif;line-height:1.2;margin:0}
+header{padding:56px 0 28px}
+h1{font-size:clamp(2.1rem,6vw,3.6rem);font-weight:800;max-width:15ch;letter-spacing:-.01em}
+.sub{color:var(--mute);max-width:52ch;margin:14px 0 0}
+.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.links a{color:var(--ink);text-decoration:none;border:1.5px solid var(--ink);padding:6px 14px;border-radius:999px;font-weight:500;font-size:.95rem;background:var(--card)}
+.links a:hover,.links a:focus-visible{background:var(--hl);color:#14213D;outline:none}
+.pg{margin-top:34px;background:var(--code);color:var(--codeink);border-radius:14px;padding:20px;box-shadow:6px 6px 0 var(--hl)}
+.pg h2{font-size:1.15rem;color:#fff;font-weight:600;margin-bottom:4px}
+.pg p{margin:0 0 12px;color:#a9b8d3;font-size:.95rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font:500 .88rem ui-monospace,Menlo,Consolas,monospace;background:#1b2b4b;color:var(--codeink);border:1px solid #33497a;border-radius:8px;padding:6px 10px;cursor:pointer}
+.chips button:hover{border-color:var(--hl)}
+.chips button[aria-pressed="true"]{background:var(--hl);color:#14213D;border-color:var(--hl)}
+.out{margin-top:14px;font:500 1rem/1.6 ui-monospace,Menlo,Consolas,monospace;min-height:5.2em}
+.out .res{color:var(--hl);font-size:1.5rem;display:block}
+.out .why{display:block;font:400 .95rem/1.5 Hind,sans-serif;color:#c8d4ea;margin-top:4px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1.5px solid var(--ink);padding:12px 0}
+.bar .wrap{display:grid;gap:10px}
+.row1{display:flex;gap:12px;align-items:center}
+input[type=search]{flex:1;min-width:0;font:inherit;padding:8px 14px;border:1.5px solid var(--ink);border-radius:10px;background:var(--card);color:var(--ink)}
+.prog{font-weight:600;white-space:nowrap;font-size:.95rem}
+.meter{height:8px;border-radius:8px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.tabs button{flex:none;font:500 .92rem Hind,sans-serif;border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:4px 12px;cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+main{padding:26px 0 40px}
+.grp{margin:30px 0 10px;font-size:1.35rem;font-weight:800}
+.t{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.t input{width:22px;height:22px;margin:14px 0 0;accent-color:var(--ok);flex:none;cursor:pointer}
+details{flex:1;min-width:0;background:var(--card);border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+details[open]{border-color:var(--ink)}
+summary{list-style:none;cursor:pointer;display:flex;gap:12px;align-items:baseline;padding:10px 14px}
+summary::-webkit-details-marker{display:none}
+summary:focus-visible,input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--hl);outline-offset:2px}
+.n{font:600 .9rem ui-monospace,Menlo,monospace;color:var(--mute);min-width:1.6em}
+.tt{font-family:"Baloo 2",sans-serif;font-weight:600;font-size:1.1rem;line-height:1.35}
+.done .tt{text-decoration:line-through;text-decoration-color:var(--ok);text-decoration-thickness:2px}
+.body{padding:0 14px 14px 52px}
+.body p{margin:0 0 10px;background:linear-gradient(transparent 58%,color-mix(in srgb,var(--hl) 55%,transparent) 58%);display:inline}
+pre{margin:12px 0 0;background:var(--code);color:var(--codeink);padding:12px 14px;border-radius:10px;overflow-x:auto;font:.9rem/1.6 ui-monospace,Menlo,Consolas,monospace}
+.empty{padding:30px;text-align:center;color:var(--mute)}
+footer{border-top:1.5px solid var(--ink);padding:26px 0 48px;color:var(--mute)}
+footer b{color:var(--ink)}
+@media (max-width:560px){.body{padding-left:14px}header{padding-top:36px}}
+@media (prefers-reduced-motion:reduce){.meter i{transition:none}}
+</style>
+</head>
+<body>
+<header class="wrap">
+  <h1>JavaScript की नींव, हिंदी में</h1>
+  <p class="sub">Chai aur Code के “JavaScript in 1 Shot, Part 1” के 30 topics। हर topic का सार एक जगह, और जो समझ गए उस पर टिक लगाते जाओ।</p>
+  <div class="links">
+    <a href="https://www.youtube.com/watch?v=sscX432bMZo" target="_blank" rel="noopener">वीडियो देखो</a>
+    <a href="https://github.com/hiteshchoudhary/js-hindi-youtube" target="_blank" rel="noopener">सारा कोड (GitHub)</a>
+  </div>
+  <section class="pg" aria-label="JavaScript की अजीब बातें">
+    <h2>पहले ख़ुद देखो: JS की अजीब बातें</h2>
+    <p>किसी expression को दबाओ, नतीजा और उसकी वजह नीचे दिखेगी।</p>
+    <div class="chips" id="chips"></div>
+    <div class="out" id="out" aria-live="polite"></div>
+  </section>
+</header>
+
+<div class="bar">
+  <div class="wrap">
+    <div class="row1">
+      <input type="search" id="q" placeholder="Topic खोजो: जैसे reduce, scope, this" aria-label="Topic खोजो">
+      <span class="prog" id="prog"></span>
+    </div>
+    <div class="meter" role="progressbar" aria-label="कितना पढ़ लिया" aria-valuemin="0" aria-valuemax="30"><i id="fill"></i></div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</div>
+
+<main class="wrap" id="list"></main>
+
+<footer>
+  <div class="wrap">
+    <p><b>आगे क्या?</b> Part 2 में DOM, Events, Async JS, OOP और Classes हैं। Topics 15, 18, 23, 29 और 30 (spread, destructuring, arrow, map/filter/reduce) React की असली नींव हैं।</p>
+    <p><b>Practice का तरीका:</b> एक topic देखो, उसी दिन उसका सारा code ख़ुद type करके चलाओ, फिर GitHub पर push करो।</p>
+  </div>
+</footer>
+
+<script>
+var G=["शुरुआत और setup","Variables, types और operations","Strings, Numbers और Dates","Arrays और Objects","Functions और scope","Control flow और loops"];
+var T=[
+[0,"JavaScript for Beginners","JS websites को interactive बनाती है और हर जगह चलती है: browser, server, mobile।"],
+[0,"Setting up Environment","VS Code + Node.js install करो, फिर terminal में node file.js चलाओ।","console.log(\"Shiva\")\n// terminal:\nnode test.js"],
+[0,"Save and Work on GitHub","Git code का version record रखता है, GitHub उसे online रखता है। यही तुम्हारा portfolio है।"],
+[1,"let, const और var","const default, let जब value बदलनी हो, var कभी नहीं।","const accountId = 144553          // बदल नहीं सकते\nlet accountEmail = \"shiva@google.com\"\nvar accountPassword = \"12345\"     // पुराना तरीका, avoid करो\nlet accountState                  // undefined"],
+[1,"Datatypes और ECMA Standards","नियम ECMA तय करता है। typeof null = \"object\" JS की पुरानी गलती है।","console.log(typeof age)        // \"number\"\nconsole.log(typeof null)       // \"object\"\nconsole.log(typeof undefined)  // \"undefined\""],
+[1,"Datatype Conversion","\"33abc\" → NaN, null → 0, undefined → NaN।","Number(\"33\")       // 33\nNumber(\"33abc\")    // NaN\nNumber(null)       // 0\nNumber(undefined)  // NaN\nBoolean(\"\")        // false"],
+[1,"Operations","\"1\" + 2 + 2 = \"122\", लेकिन 1 + 2 + \"2\" = \"32\"। जहाँ पहला string आया, आगे सब string।","console.log(\"1\" + 2 + 2)   // \"122\"\nconsole.log(1 + 2 + \"2\")   // \"32\""],
+[1,"Comparison","हमेशा === use करो। null >= 0 true है, पर null == 0 false।","null >= 0   // true\nnull == 0   // false\nnull > 0    // false"],
+[1,"Datatypes Summary","Primitive 7 (copy मिलती है) बनाम Non-Primitive 3 (reference मिलता है)।"],
+[1,"Stack और Heap","Primitive की copy मिलती है, Object का reference मिलता है।"],
+[2,"Strings","Backtick और ${ } modern तरीका है। slice और substring एक जैसे नहीं हैं।"],
+[2,"Numbers और Math","Random range formula: Math.floor(Math.random()*(max-min+1))+min।"],
+[2,"Dates","महीना 0 से शुरू होता है। Date एक object है, timestamp milliseconds में।"],
+[3,"Arrays 1","slice नई copy बनाता है, splice original array को काट देता है।"],
+[3,"Arrays 2","Spread (...) फैलाता है, flat(Infinity) nested array खोल देता है।"],
+[3,"Objects 1","Keys string या Symbol होती हैं। Symbol key के लिए [mySym] brackets ज़रूरी। freeze = lock।"],
+[3,"Objects 2","Spread से objects जोड़ो। Object.keys, values, entries से data निकालो।"],
+[3,"Destructuring और JSON","{ courseInstructor: instructor } वाली भाषा React props में हर जगह दिखती है।"],
+[4,"Functions","Parameters बनाम arguments। return के बाद कुछ नहीं चलता। Rest (...) बाक़ी सब समेटता है।"],
+[4,"Functions + Object/Array","Function parameter से काम करता है, बाहर के data से नहीं।"],
+[4,"Global और Local Scope","अंदर वाला बाहर को देख सकता है, बाहर वाला अंदर को नहीं।"],
+[4,"Scope और Hoisting","Declaration hoist होती है, variable वाला function expression नहीं।"],
+[4,"this और Arrow Functions","this = current context। Arrow function का अपना this नहीं होता।"],
+[4,"IIFE","बनते ही चलने वाला function। दो IIFE के बीच ; ज़रूरी है।"],
+[4,"Execution Context","Global Context में Memory Phase और Execution Phase, फिर Call Stack (LIFO)।"],
+[5,"Control Flow","Falsy सिर्फ़ 8 हैं। ?? सिर्फ़ null/undefined पर backup देता है। Ternary = छोटा if-else।"],
+[5,"For Loop","break = पूरा रुको, continue = सिर्फ़ यह बार skip करो।"],
+[5,"While और Do-While","do-while कम-से-कम एक बार ज़रूर चलता है, शर्त बाद में check होती है।"],
+[5,"High Order Array Loops","for of = values, for in = keys, forEach = कुछ return नहीं करता।","for (const num of [1,2,3]) console.log(num)\nfor (const key in myObject) console.log(key, myObject[key])\ncoding.forEach((item, index, arr) => console.log(item))"],
+[5,"Filter, Map और Reduce","छाँटो, बदलो, समेटो। React में list, search और cart total इन्हीं तीनों से बनते हैं।","[1,2,3,4,5,6,7,8,9,10].filter((n) => n > 4)\n// [5, 6, 7, 8, 9, 10]\n\n[1,2,3].map((n) => n + 10)\n// [11, 12, 13]\n\nshoppingCart.reduce((acc, item) => acc + item.price, 0)\n// 22996"]
+];
+var X=[
+['typeof null','"object" है, null नहीं। यह JS की पुरानी गलती है, interview में सबसे ज़्यादा पूछी जाती है।'],
+['"1" + 2 + 2','पहले string आया, इसलिए बाक़ी सब भी जुड़कर string बन गए।'],
+['1 + 2 + "2"','पहले 1 + 2 = 3 हुआ, फिर string "2" जुड़ा।'],
+['Number("33abc")','गणना fail हुई, इसलिए NaN।'],
+['typeof NaN','NaN का मतलब "Not a Number", फिर भी इसकी type number है।'],
+['Number(null)','null को number बनाओ तो 0 मिलता है।'],
+['null >= 0','>= में null पहले 0 बनता है, इसलिए true।'],
+['null == 0','== में null सिर्फ़ undefined के बराबर होता है, इसलिए false।']
+];
+var KEY="jsp1-done",done={},grp=-1,term="";
+try{done=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){done={}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(done))}catch(e){}}
+function fmt(v){return typeof v==="string"?JSON.stringify(v):String(v)}
+var chips=document.getElementById("chips"),out=document.getElementById("out");
+function show(i){
+  var r;try{r=fmt(new Function("return ("+X[i][0]+")")())}catch(e){r="error"}
+  out.innerHTML="";
+  var c=document.createElement("code");c.textContent=X[i][0];
+  var s=document.createElement("span");s.className="res";s.textContent=r;
+  var w=document.createElement("span");w.className="why";w.textContent=X[i][1];
+  out.append(c,s,w);
+  [].forEach.call(chips.children,function(b,j){b.setAttribute("aria-pressed",j===i)});
+}
+X.forEach(function(x,i){var b=document.createElement("button");b.textContent=x[0];b.setAttribute("aria-pressed","false");b.onclick=function(){show(i)};chips.appendChild(b)});
+show(0);
+var tabs=document.getElementById("tabs");
+["सब"].concat(G).forEach(function(g,i){var b=document.createElement("button");b.textContent=g;b.setAttribute("aria-pressed",i===0);b.onclick=function(){grp=i-1;[].forEach.call(tabs.children,function(x,j){x.setAttribute("aria-pressed",j===i)});render()};tabs.appendChild(b)});
+document.getElementById("q").addEventListener("input",function(e){term=e.target.value.trim().toLowerCase();render()});
+function upd(){
+  var n=Object.keys(done).filter(function(k){return done[k]}).length;
+  document.getElementById("prog").textContent=n+" / 30 पूरे";
+  document.getElementById("fill").style.width=(n/30*100)+"%";
+  document.querySelector(".meter").setAttribute("aria-valuenow",n);
+}
+function render(){
+  var list=document.getElementById("list");list.innerHTML="";var last=-1,count=0;
+  T.forEach(function(t,i){
+    var n=i+1;
+    if(grp>=0&&t[0]!==grp)return;
+    if(term&&(t[1]+" "+t[2]+" "+(t[3]||"")).toLowerCase().indexOf(term)<0)return;
+    if(t[0]!==last){var h=document.createElement("h2");h.className="grp";h.textContent=G[t[0]];list.appendChild(h);last=t[0]}
+    var row=document.createElement("div");row.className="t"+(done[n]?" done":"");
+    var cb=document.createElement("input");cb.type="checkbox";cb.checked=!!done[n];cb.setAttribute("aria-label","Topic "+n+" पूरा हुआ");
+    cb.onchange=function(){done[n]=cb.checked;row.classList.toggle("done",cb.checked);save();upd()};
+    var d=document.createElement("details");
+    var s=document.createElement("summary");
+    s.innerHTML='<span class="n"></span><span class="tt"></span>';
+    s.firstChild.textContent=n;s.lastChild.textContent=t[1];
+    var b=document.createElement("div");b.className="body";
+    var p=document.createElement("p");p.textContent=t[2];b.appendChild(p);
+    if(t[3]){var pre=document.createElement("pre");var code=document.createElement("code");code.textContent=t[3];pre.appendChild(code);b.appendChild(pre)}
+    d.append(s,b);row.append(cb,d);list.appendChild(row);count++;
+  });
+  if(!count){var e=document.createElement("div");e.className="empty";e.textContent="कोई topic नहीं मिला। दूसरा शब्द आज़माओ या “सब” चुनो।";list.appendChild(e)}
+}
+render();upd();
+</script>
+</body>
+</html>
